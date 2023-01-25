@@ -5,5 +5,6 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
 interface CookingRecordsRepository {
-    fun getCookingRecords(offet: Int, limit: Int): Flow<Response<CookingRecords>>
+//    fun getCookingRecords(offet: Int, limit: Int): Flow<Response<CookingRecords>>
+    fun getCookingRecords(offet: Int, limit: Int): Response<CookingRecords>
 }
