@@ -10,13 +10,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.oishikenko.android.recruitment.data.model.CookingRecord
+import com.oishikenko.android.recruitment.feature.R
 
 @Composable
 fun RecipeListItem(
@@ -27,7 +28,6 @@ fun RecipeListItem(
     var imageUrl = cookingRecord.imageUrl.split("/")[4]
     var recipeType = cookingRecord.recipeType
     var recordedAt = cookingRecord.recordedAt
-
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -42,9 +42,7 @@ fun RecipeListItem(
                 shape = RoundedCornerShape(8.dp)
             )
             .clickable {
-//                println(cookingRecord.comment)
-//                navController.navigate("second/${cookingRecord.comment}/${cookingRecord.imageUrl}/${cookingRecord.recipeType}/${cookingRecord.recordedAt}")
-                navController.navigate("second/$comment/$imageUrl/$recipeType/$recordedAt")
+                navController.navigate("recipe_detail/$comment/$imageUrl/$recipeType/$recordedAt")
 
             },
     ) {
@@ -67,34 +65,19 @@ fun RecipeListItem(
         ) {
             Text(
                 text =
-                //TODO: ロジック側で処理したい
                 when (cookingRecord.recipeType) {
-                    "main_dish" -> "主菜/主食"
-                    "side_dish" -> "副菜"
-                    "soup" -> "スープ"
+                    "main_dish" -> stringResource(id = R.string.recipe_type_main)
+                    "side_dish" -> stringResource(id = R.string.recipe_type_side)
+                    "soup" -> stringResource(id = R.string.recipe_type_soup)
                     else -> ""
                 },
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
             )
             Text(
-//                text = cookingRecord.recordedAt,
                 text = cookingRecord.recordedAt.replace("-", "/").dropLast(3),
                 fontSize = 14.sp,
             )
         }
     }
 }
-
-//@Preview
-//@Composable
-//fun PreviewRecipeListItem() {
-//    RecipeListItem(
-//        cookingRecord = CookingRecord(
-//            imageUrl = "",
-//            comment = "豚肉のコクとごぼうの香り、野菜の甘みで奥行きのある味わい。",
-//            recipeType = "soup",
-//            recordedAt = "2018-05-01 17:57:31"
-//        )
-//    )
-//}

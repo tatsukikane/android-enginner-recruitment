@@ -4,10 +4,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -38,7 +35,6 @@ fun RecipeListScreen(
     var cookingRecords = viewModel.cookingRecordsPager.collectAsLazyPagingItems()
     val navController = rememberNavController()
 
-//    val cookingRecords by viewModel.cookingRecords.collectAsStateWithLifecycle()
     Scaffold { innerPadding ->
         NavHost(navController = navController, startDestination = "main") {
             composable("main") {
@@ -94,16 +90,16 @@ fun RecipeListScreen(
                 }
             }
             composable(
-                "second/{comment}/{image_url}/{recipe_type}/{recorded_at}", arguments = listOf(
+                "recipe_detail/{comment}/{image_name}/{recipe_type}/{recorded_at}", arguments = listOf(
                     navArgument("comment") { type = NavType.StringType },
-                    navArgument("image_url") { type = NavType.StringType },
+                    navArgument("image_name") { type = NavType.StringType },
                     navArgument("recipe_type") { type = NavType.StringType },
                     navArgument("recorded_at") { type = NavType.StringType },
 
                     )
             ) { backStackEntry ->
                 val comment = backStackEntry.arguments?.getString("comment") ?: ""
-                val image_url = backStackEntry.arguments?.getString("image_url") ?: ""
+                val image_name = backStackEntry.arguments?.getString("image_name") ?: ""
                 val recipe_type = backStackEntry.arguments?.getString("recipe_type") ?: ""
                 val recorded_at = backStackEntry.arguments?.getString("recorded_at") ?: ""
 
@@ -111,100 +107,12 @@ fun RecipeListScreen(
                     index = 1,
                     navController = navController,
                     comment = comment,
-                    image_url = image_url,
+                    image_name = image_name,
                     recipe_type = recipe_type,
                     recorded_at = recorded_at
                 )
             }
         }
-//        Column {
-//            Row(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .height(52.dp),
-//                horizontalArrangement = Arrangement.Center,
-//                verticalAlignment = Alignment.CenterVertically
-//            ) {
-//                Text(
-//                    text = stringResource(id = R.string.cooking_records_title),
-//                    fontSize = 20.sp,
-//                    fontWeight = FontWeight.Bold,
-//                )
-//                Spacer(modifier = Modifier.width(8.dp))
-//                Image(
-//                    painter = painterResource(R.drawable.top_bar_icon),
-//                    contentDescription = "food",
-//                    modifier = Modifier
-//                        .size(64.dp)
-//                )
-//            }
-//            LazyColumn(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(innerPadding)
-//                    .consumedWindowInsets(innerPadding)
-//            ) {
-//                items(cookingRecords) { item ->
-//                    item?.let { RecipeListItem(cookingRecord = it) }
-//                }
-//                when (cookingRecords.loadState.append) {
-//                    is LoadState.Error -> Unit
-//                    LoadState.Loading -> {
-//                        item {
-//                            LoadingItem()
-//                        }
-//                    }
-//                    is LoadState.NotLoading -> {
-//                        item {
-//                            LoadingItem()
-//                        }
-//                    }
-//                }
-//
-////                when (cookingRecords.loadState.refresh) {
-////                    is LoadState.Error -> Unit
-////                    LoadState.Loading -> {
-////                        item {
-////                            Box(
-////                                modifier = Modifier
-////                                    .fillMaxWidth(),
-////                                contentAlignment = Alignment.Center
-////                            ) {
-////                                CircularProgressIndicator(
-//////                                    modifier = Modifier
-//////                                        .width(42.dp)
-//////                                        .height(42.dp)
-//////                                        .padding(8.dp),
-//////                                    strokeWidth = 5.dp
-////                                )
-////                            }
-////                        }
-////                    }
-////                    is LoadState.NotLoading -> {
-////                        item {
-////                            Box(
-////                                modifier = Modifier
-////                                    .fillMaxWidth(),
-////                                contentAlignment = Alignment.Center
-////                            ) {
-////                                CircularProgressIndicator(
-//////                                    modifier = Modifier
-//////                                        .width(42.dp)
-//////                                        .height(42.dp)
-//////                                        .padding(8.dp),
-//////                                    strokeWidth = 5.dp
-////                                )
-////                            }
-////                        }
-////                    }
-////                }
-//
-////                items(cookingRecords) {
-////                    RecipeListItem(it)
-////                }
-////                item { CircularProgressIndicator() }
-//            }
-//        }
     }
 }
 
