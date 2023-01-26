@@ -20,11 +20,11 @@ class RecipeListPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, CookingRecord> {
         return try {
             var page = params.key ?: 1
-            var response = repo.getCookingRecords(page, 7).body()
+            var response = repo.getCookingRecords(page, params.loadSize)
             LoadResult.Page(
-                data = response!!.cookingRecords,
+                data = response.body()!!.cookingRecords,
                 prevKey = null,
-                nextKey = if (response.cookingRecords.isNotEmpty()) response.pagination.offset + 1 else null
+                nextKey = if (response.body()!!.cookingRecords.isNotEmpty()) response.body()!!.pagination.offset + 1 else null
             )
         } catch (e: Exception){
             LoadResult.Error(e)

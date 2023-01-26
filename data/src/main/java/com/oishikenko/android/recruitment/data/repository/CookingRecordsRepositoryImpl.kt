@@ -2,19 +2,20 @@ package com.oishikenko.android.recruitment.data.repository
 
 import com.oishikenko.android.recruitment.data.model.CookingRecords
 import com.oishikenko.android.recruitment.data.network.CookingRecordsNetworkApi
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.runBlocking
 import retrofit2.Response
 import javax.inject.Inject
 
-class CookingRecordsRepositoryImpl @Inject constructor (
+class CookingRecordsRepositoryImpl @Inject constructor(
     var cookingRecordsNetworkApi: CookingRecordsNetworkApi
-): CookingRecordsRepository {
-    override fun getCookingRecords(offet: Int, limit: Int): Response<CookingRecords>{
-        return runBlocking{
-            cookingRecordsNetworkApi.getCookingRecords(offset = offet, limit = limit)
-        }
-//        cookingRecordsNetworkApi.getCookingRecords(offset = offet, limit = limit)
+) : CookingRecordsRepository {
+//    [pagingテスト]
+//    var error = 0
+    override suspend fun getCookingRecords(offet: Int, limit: Int): Response<CookingRecords> {
+//        [pagingテスト]
+//        delay(3000L)
+//        error++
+//        if (error == 4)
+//            throw IOException("some error")
+        return cookingRecordsNetworkApi.getCookingRecords(offset = offet, limit = limit)
     }
 }

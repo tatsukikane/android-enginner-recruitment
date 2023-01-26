@@ -69,15 +69,36 @@ fun RecipeListScreen(
                     }
                 }
                 when (cookingRecords.loadState.append) {
-                    is LoadState.Error -> Unit
+                    is LoadState.NotLoading -> Unit
                     LoadState.Loading -> {
                         item {
                             LoadingItem()
                         }
                     }
-                    is LoadState.NotLoading -> {
+                    is LoadState.Error -> {
                         item {
-                            LoadingItem()
+                            ErrorItem(message = "エラーが発生しました")
+                        }
+                    }
+                }
+                //アプリ起動後の初回ローディング
+                when (cookingRecords.loadState.refresh) {
+                    is LoadState.NotLoading -> Unit
+                    LoadState.Loading -> {
+                        item {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .wrapContentHeight(),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                CircularProgressIndicator()
+                            }
+                        }
+                    }
+                    is LoadState.Error -> {
+                        item {
+                            ErrorItem(message = "エラーが発生しました")
                         }
                     }
                 }
@@ -130,12 +151,3 @@ fun ErrorItem(message: String) {
         }
     }
 }
-
-
-//@Preview
-//@Composable
-//fun PreviewRecipeListScreen() {
-//    MaterialTheme {
-//        RecipeListScreen()
-//    }
-//}
