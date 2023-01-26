@@ -27,7 +27,6 @@ import com.oishikenko.android.recruitment.feature.R
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun RecipeDetailScreen(
-    index: Int,
     navController: NavController,
     comment: String,
     image_name: String,

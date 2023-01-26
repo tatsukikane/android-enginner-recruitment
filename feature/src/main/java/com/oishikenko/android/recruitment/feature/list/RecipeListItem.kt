@@ -42,7 +42,7 @@ fun RecipeListItem(
                 shape = RoundedCornerShape(8.dp)
             )
             .clickable {
-                navController.navigate("recipe_detail/$comment/$imageUrl/$recipeType/$recordedAt")
+                navController.navigate("recipe_detail_screen/$comment/$imageUrl/$recipeType/$recordedAt")
 
             },
     ) {
