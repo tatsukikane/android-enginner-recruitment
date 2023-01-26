@@ -1,5 +1,6 @@
 package com.oishikenko.android.recruitment.feature.list
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -28,10 +29,11 @@ fun RecipeListItem(
     var imageUrl = cookingRecord.imageUrl.split("/")[4]
     var recipeType = cookingRecord.recipeType
     var recordedAt = cookingRecord.recordedAt
+    var recipeNameNumber = (1..3).random()
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(96.dp)
+            .height(192.dp)
             .padding(
                 horizontal = 16.dp,
                 vertical = 8.dp,
@@ -42,7 +44,7 @@ fun RecipeListItem(
                 shape = RoundedCornerShape(8.dp)
             )
             .clickable {
-                navController.navigate("recipe_detail_screen/$comment/$imageUrl/$recipeType/$recordedAt")
+                navController.navigate("recipe_detail_screen/$comment/$imageUrl/$recipeType/$recordedAt/$recipeNameNumber")
 
             },
     ) {
@@ -52,7 +54,7 @@ fun RecipeListItem(
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 //TODO: 高さ指定、定数を入れずにやるやり方がありそう
-                .size(96.dp)
+                .size(192.dp)
                 .clip(RoundedCornerShape(8.dp)),
         )
         Column(
@@ -61,8 +63,20 @@ fun RecipeListItem(
                 .padding(
                     start = 8.dp,
                 ),
-            verticalArrangement = Arrangement.Center,
         ) {
+            Text(
+                text = when (recipeNameNumber) {
+                    1 -> stringResource(id = R.string.recipe_name_1)
+                    2 -> stringResource(id = R.string.recipe_name_2)
+                    3 -> stringResource(id = R.string.recipe_name_3)
+                    else -> ""
+                },
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(
+                    vertical = 8.dp,
+                )
+            )
             Text(
                 text =
                 when (cookingRecord.recipeType) {
@@ -74,10 +88,40 @@ fun RecipeListItem(
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
             )
-            Text(
-                text = cookingRecord.recordedAt.replace("-", "/").dropLast(3),
-                fontSize = 14.sp,
-            )
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.padding(top = 4.dp)
+                    .background(
+                        color = Color(0xFFffa500),
+                        shape = RoundedCornerShape(20.dp)
+                    )
+            ) {
+                Text(
+                    text = when (recipeNameNumber) {
+                        1 -> stringResource(id = R.string.recipe_tag_1)
+                        2 -> stringResource(id = R.string.recipe_tag_2)
+                        3 -> stringResource(id = R.string.recipe_tag_3)
+                        else -> ""
+                    },
+                    fontSize = 12.sp,
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier
+                        .padding(4.dp)
+                )
+            }
+            Spacer(modifier = Modifier.weight(1.0f))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Spacer(modifier = Modifier.weight(1.0f))
+                Text(
+                    text = "作成日：${cookingRecord.recordedAt.replace("-", "/").dropLast(9)}",
+                    fontSize = 14.sp,
+                    color = Color(0xFF676767),
+                    modifier = Modifier.padding(end = 16.dp)
+                )
+            }
         }
     }
 }

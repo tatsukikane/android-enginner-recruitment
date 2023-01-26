@@ -32,6 +32,7 @@ fun RecipeDetailScreen(
     image_name: String,
     recipe_type: String,
     recorded_at: String,
+    recipe_name_number: String
 ) {
     var imageUrl = "https://cooking-records.ex.oishi-kenko.com/images/$image_name"
     Scaffold(
@@ -103,22 +104,66 @@ fun RecipeDetailScreen(
                     Spacer(modifier = Modifier.width(16.dp))
                 }
             }
-            Text(
-                text = comment,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.W500,
-                modifier = Modifier.padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 4.dp)
-            )
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                Spacer(modifier = Modifier.weight(1.0f))
-                Text(
-                    text = recorded_at.replace("-", "/").dropLast(3),
-                    fontSize = 14.sp,
-                    color = Color(0xFF676767),
-                    modifier = Modifier.padding(end = 16.dp)
+            Column(
+                modifier = Modifier.padding(
+                    horizontal = 16.dp,
                 )
+            ) {
+                Text(
+                    text = when (recipe_name_number) {
+                        "1" -> stringResource(id = R.string.recipe_name_1)
+                        "2" -> stringResource(id = R.string.recipe_name_2)
+                        "3" -> stringResource(id = R.string.recipe_name_3)
+                        else -> ""
+                    },
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier
+                        .padding(top = 4.dp)
+                        .background(
+                            color = Color(0xFFffa500),
+                            shape = RoundedCornerShape(20.dp)
+                        )
+                ) {
+                    Text(
+                        text = when (recipe_name_number) {
+                            "1" -> stringResource(id = R.string.recipe_tag_1)
+                            "2" -> stringResource(id = R.string.recipe_tag_2)
+                            "3" -> stringResource(id = R.string.recipe_tag_3)
+                            else -> ""
+                        },
+                        fontSize = 12.sp,
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier
+                            .padding(4.dp)
+                    )
+                }
+                Text(
+                    text = comment,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.W500,
+                )
+                Text(
+                    "[レシピ]", fontWeight = FontWeight.Bold, modifier = Modifier.padding(
+                        vertical = 16.dp,
+                    )
+                )
+                Text("作り方ーーーーーーーーーーーー\nーーーーーーーーーーーーーーー")
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Spacer(modifier = Modifier.weight(1.0f))
+                    Text(
+                        text = recorded_at.replace("-", "/").dropLast(3),
+                        fontSize = 14.sp,
+                        color = Color(0xFF676767),
+                    )
+                }
             }
         }
     }

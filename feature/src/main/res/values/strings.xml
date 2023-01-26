@@ -4,6 +4,14 @@
     <string name="recipe_type_main">主菜/主食</string>
     <string name="recipe_type_side">副菜</string>
     <string name="recipe_type_soup">スープ</string>
+    <string name="recipe_name_1">包み焼きハンバーグ</string>
+    <string name="recipe_name_2">簡単オニオンスープ</string>
+    <string name="recipe_name_3">ほうれん草のおひたし</string>
+    <string name="recipe_tag_1">#かんたん</string>
+    <string name="recipe_tag_2">#ヘルシー</string>
+    <string name="recipe_tag_3">#ガッツリ</string>
+
+
 
 
 </resources>
