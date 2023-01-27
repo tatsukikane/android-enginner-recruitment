@@ -19,7 +19,7 @@ fun HomeScreen() {
                 navArgument("image_name") { type = NavType.StringType },
                 navArgument("recipe_type") { type = NavType.StringType },
                 navArgument("recorded_at") { type = NavType.StringType },
-                navArgument("recipe_name_number") { type = NavType.StringType },
+                navArgument("recipe_name_number") { type = NavType.IntType },
 
                 )
         ) { backStackEntry ->
@@ -27,7 +27,7 @@ fun HomeScreen() {
             val image_name = backStackEntry.arguments?.getString("image_name") ?: ""
             val recipe_type = backStackEntry.arguments?.getString("recipe_type") ?: ""
             val recorded_at = backStackEntry.arguments?.getString("recorded_at") ?: ""
-            val recipe_name_number = backStackEntry.arguments?.getString("recipe_name_number") ?: ""
+            val recipe_name_number = backStackEntry.arguments?.getInt("recipe_name_number") ?: 1
 
 
             RecipeDetailScreen(

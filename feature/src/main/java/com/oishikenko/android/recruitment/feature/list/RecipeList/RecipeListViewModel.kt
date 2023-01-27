@@ -1,4 +1,4 @@
-package com.oishikenko.android.recruitment.feature.list
+package com.oishikenko.android.recruitment.feature.list.RecipeList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

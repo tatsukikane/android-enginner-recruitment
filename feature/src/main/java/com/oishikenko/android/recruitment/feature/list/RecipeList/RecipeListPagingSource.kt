@@ -1,4 +1,4 @@
-package com.oishikenko.android.recruitment.feature.list
+package com.oishikenko.android.recruitment.feature.list.RecipeList
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

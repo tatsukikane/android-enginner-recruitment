@@ -1,6 +1,5 @@
 package com.oishikenko.android.recruitment.feature.list
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -45,7 +44,6 @@ fun RecipeListItem(
             )
             .clickable {
                 navController.navigate("recipe_detail_screen/$comment/$imageUrl/$recipeType/$recordedAt/$recipeNameNumber")
-
             },
     ) {
         AsyncImage(
@@ -64,17 +62,10 @@ fun RecipeListItem(
                 ),
         ) {
             Text(
-                text = when (recipeNameNumber) {
-                    1 -> stringResource(id = R.string.recipe_name_1)
-                    2 -> stringResource(id = R.string.recipe_name_2)
-                    3 -> stringResource(id = R.string.recipe_name_3)
-                    else -> ""
-                },
+                text = RecipeNameGenerator(recipeNameNumber),
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(
-                    vertical = 8.dp,
-                )
+                modifier = Modifier.padding(vertical = 8.dp)
             )
             Text(
                 text =
@@ -87,32 +78,9 @@ fun RecipeListItem(
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
             )
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.padding(top = 4.dp)
-                    .background(
-                        color = Color(0xFFffa500),
-                        shape = RoundedCornerShape(20.dp)
-                    )
-            ) {
-                Text(
-                    text = when (recipeNameNumber) {
-                        1 -> stringResource(id = R.string.recipe_tag_1)
-                        2 -> stringResource(id = R.string.recipe_tag_2)
-                        3 -> stringResource(id = R.string.recipe_tag_3)
-                        else -> ""
-                    },
-                    fontSize = 12.sp,
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier
-                        .padding(4.dp)
-                )
-            }
+            TagLabelWidget(recipeNameNumber)
             Spacer(modifier = Modifier.weight(1.0f))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-            ) {
+            Row(modifier = Modifier.fillMaxWidth()) {
                 Spacer(modifier = Modifier.weight(1.0f))
                 Text(
                     text = "作成日：${cookingRecord.recordedAt.replace("-", "/").dropLast(9)}",
