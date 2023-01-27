@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -108,6 +110,7 @@ fun RecipeDetailScreen(
                 modifier = Modifier.padding(
                     horizontal = 16.dp,
                 )
+                    .verticalScroll(rememberScrollState())
             ) {
                 Text(
                     text = when (recipe_name_number) {
@@ -144,12 +147,17 @@ fun RecipeDetailScreen(
                     )
                 }
                 Text(
+                    text = stringResource(id = R.string.records_detail_title_comment), fontWeight = FontWeight.Bold, modifier = Modifier.padding(
+                        vertical = 16.dp,
+                    )
+                )
+                Text(
                     text = comment,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.W500,
                 )
                 Text(
-                    "[レシピ]", fontWeight = FontWeight.Bold, modifier = Modifier.padding(
+                    text = stringResource(id = R.string.records_detail_title_recipe), fontWeight = FontWeight.Bold, modifier = Modifier.padding(
                         vertical = 16.dp,
                     )
                 )
