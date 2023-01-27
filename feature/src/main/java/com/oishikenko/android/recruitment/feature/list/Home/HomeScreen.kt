@@ -14,7 +14,8 @@ fun HomeScreen() {
     NavHost(navController = navController, startDestination = "recipe_list_screen") {
         composable("recipe_list_screen") { RecipeListScreen(hiltViewModel(), navController) }
         composable(
-            "recipe_detail_screen/{comment}/{image_name}/{recipe_type}/{recorded_at}/{recipe_name_number}", arguments = listOf(
+            "recipe_detail_screen/{comment}/{image_name}/{recipe_type}/{recorded_at}/{recipe_name_number}",
+            arguments = listOf(
                 navArgument("comment") { type = NavType.StringType },
                 navArgument("image_name") { type = NavType.StringType },
                 navArgument("recipe_type") { type = NavType.StringType },
@@ -28,7 +29,6 @@ fun HomeScreen() {
             val recipe_type = backStackEntry.arguments?.getString("recipe_type") ?: ""
             val recorded_at = backStackEntry.arguments?.getString("recorded_at") ?: ""
             val recipe_name_number = backStackEntry.arguments?.getInt("recipe_name_number") ?: 1
-
 
             RecipeDetailScreen(
                 navController = navController,

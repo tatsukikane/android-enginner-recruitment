@@ -8,7 +8,7 @@ import com.oishikenko.android.recruitment.data.repository.CookingRecordsReposito
 class RecipeListPagingSource(
     //データ取得用の関数を利用するため
     private val repo: CookingRecordsRepository
-) : PagingSource<Int,CookingRecord> (){
+) : PagingSource<Int, CookingRecord>() {
     //取得する必要があるページ番号を取得する関数
     override fun getRefreshKey(state: PagingState<Int, CookingRecord>): Int? {
         return state.anchorPosition?.let { position ->
@@ -26,9 +26,8 @@ class RecipeListPagingSource(
                 prevKey = null,
                 nextKey = if (response.body()!!.cookingRecords.isNotEmpty()) response.body()!!.pagination.offset + 1 else null
             )
-        } catch (e: Exception){
+        } catch (e: Exception) {
             LoadResult.Error(e)
         }
     }
-
 }

@@ -15,7 +15,7 @@ class RecipeListViewModel @Inject constructor(
 ) : ViewModel() {
     val cookingRecordsPager = Pager(
         PagingConfig(pageSize = 100)
-    ){
+    ) {
         RecipeListPagingSource(cookingRecordsRepository)
     }.flow.cachedIn(viewModelScope)
 }

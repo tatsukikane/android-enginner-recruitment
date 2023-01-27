@@ -31,7 +31,7 @@ fun RecipeListScreen(
     viewModel: RecipeListViewModel = hiltViewModel(),
     navController: NavController
 ) {
-    var cookingRecords = viewModel.cookingRecordsPager.collectAsLazyPagingItems()
+    val cookingRecords = viewModel.cookingRecordsPager.collectAsLazyPagingItems()
     Scaffold { innerPadding ->
         Column {
             Row(
@@ -54,7 +54,7 @@ fun RecipeListScreen(
                         .size(64.dp)
                 )
             }
-            Box() {
+            Box {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -78,7 +78,7 @@ fun RecipeListScreen(
                         }
                         is LoadState.Error -> {
                             item {
-                                ErrorItem(message = "エラーが発生しました")
+                                ErrorItem(message = stringResource(id = R.string.error))
                             }
                         }
                     }
@@ -99,7 +99,7 @@ fun RecipeListScreen(
                         }
                         is LoadState.Error -> {
                             item {
-                                ErrorItem(message = "エラーが発生しました")
+                                ErrorItem(message = stringResource(id = R.string.error))
                             }
                         }
                     }

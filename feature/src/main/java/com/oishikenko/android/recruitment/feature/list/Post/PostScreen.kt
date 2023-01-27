@@ -48,28 +48,7 @@ fun PostRecipeScreen(
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
         ) {
-            Box(modifier = Modifier.height(288.dp)) {
-                AsyncImage(
-                    model = "https://cooking-records.ex.oishi-kenko.com/images/3.jpg",
-                    contentDescription = "food",
-                    contentScale = ContentScale.Fit,
-                    modifier = Modifier.fillMaxWidth()
-                )
-                Row(
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.align(Alignment.Center)
-                ) {
-                    IconButton(onClick = { }) {
-                        Icon(
-                            painter = rememberVectorPainter(image = Icons.Default.AddCircle),
-                            contentDescription = "go back",
-                            modifier = Modifier.size(72.dp),
-                            tint = Color.White
-                        )
-                    }
-                }
-            }
+            TappableIconOnImageWidget()
             Column(modifier = Modifier.padding(horizontal = 16.dp)) {
                 TitleAndDropdownMenuButton(
                     title = stringResource(id = R.string.recipe_type),
@@ -87,6 +66,34 @@ fun PostRecipeScreen(
                 TitleAndTextField(stringResource(id = R.string.records_detail_title_comment))
                 TitleAndTextField(stringResource(id = R.string.records_detail_title_recipe))
                 RegisterButton()
+            }
+        }
+    }
+}
+
+@Composable
+fun TappableIconOnImageWidget(
+//    imageUrl: String
+) {
+    Box(modifier = Modifier.height(288.dp)) {
+        AsyncImage(
+            model = "https://cooking-records.ex.oishi-kenko.com/images/3.jpg",
+            contentDescription = "food",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.align(Alignment.Center)
+        ) {
+            IconButton(onClick = { }) {
+                Icon(
+                    painter = rememberVectorPainter(image = Icons.Default.AddCircle),
+                    contentDescription = "add picture",
+                    modifier = Modifier.size(72.dp),
+                    tint = Color.White
+                )
             }
         }
     }

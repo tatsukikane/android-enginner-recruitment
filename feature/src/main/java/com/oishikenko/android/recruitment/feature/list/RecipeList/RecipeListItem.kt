@@ -24,11 +24,11 @@ fun RecipeListItem(
     cookingRecord: CookingRecord,
     navController: NavController
 ) {
-    var comment = cookingRecord.comment
-    var imageUrl = cookingRecord.imageUrl.split("/")[4]
-    var recipeType = cookingRecord.recipeType
-    var recordedAt = cookingRecord.recordedAt
-    var recipeNameNumber = (1..3).random()
+    val comment = cookingRecord.comment
+    val imageUrl = cookingRecord.imageUrl.split("/")[4]
+    val recipeType = cookingRecord.recipeType
+    val recordedAt = cookingRecord.recordedAt
+    val recipeNameNumber = (1..3).random()
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -57,9 +57,7 @@ fun RecipeListItem(
         Column(
             modifier = Modifier
                 .fillMaxHeight()
-                .padding(
-                    start = 8.dp,
-                ),
+                .padding(start = 8.dp),
         ) {
             Text(
                 text = RecipeNameGenerator(recipeNameNumber),
