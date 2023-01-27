@@ -39,5 +39,6 @@ fun HomeScreen() {
                 recipe_name_number = recipe_name_number
             )
         }
+        composable("post_recipe_screen") { PostRecipeScreen(navController) }
     }
 }

@@ -104,7 +104,7 @@ fun RecipeListScreen(
                     }
                 }
                 FloatingActionButton(
-                    onClick = { /*do something*/ },
+                    onClick = { navController.navigate("post_recipe_screen") },
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
                         .padding(12.dp),

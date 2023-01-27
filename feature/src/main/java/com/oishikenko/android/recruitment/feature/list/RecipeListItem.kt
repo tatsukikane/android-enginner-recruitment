@@ -53,7 +53,6 @@ fun RecipeListItem(
             contentDescription = cookingRecord.comment,
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                //TODO: 高さ指定、定数を入れずにやるやり方がありそう
                 .size(192.dp)
                 .clip(RoundedCornerShape(8.dp)),
         )

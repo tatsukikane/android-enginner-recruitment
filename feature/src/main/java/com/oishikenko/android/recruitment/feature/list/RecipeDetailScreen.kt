@@ -38,7 +38,7 @@ fun RecipeDetailScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("レシピ", fontWeight = FontWeight.Bold) },
+                title = { Text(text = stringResource(id = R.string.records_detail_title), fontWeight = FontWeight.Bold) },
                 backgroundColor = Color.White,
                 navigationIcon = {
                     IconButton(onClick = { navController.navigateUp() }) {

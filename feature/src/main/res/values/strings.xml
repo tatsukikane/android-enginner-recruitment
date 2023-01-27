@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="cooking_records_title">わたしの料理記録</string>
+    <string name="records_detail_title">レシピ</string>
+    <string name="records_detail_title_recipe_name">[レシピ名]</string>
+    <string name="records_detail_title_comment">[コメント]</string>
+    <string name="records_detail_title_recipe">[レシピ]</string>
     <string name="recipe_type_main">主菜/主食</string>
     <string name="recipe_type_side">副菜</string>
     <string name="recipe_type_soup">スープ</string>
@@ -10,6 +14,7 @@
     <string name="recipe_tag_1">#かんたん</string>
     <string name="recipe_tag_2">#ヘルシー</string>
     <string name="recipe_tag_3">#ガッツリ</string>
+    <string name="register">登録</string>
 
 
 
