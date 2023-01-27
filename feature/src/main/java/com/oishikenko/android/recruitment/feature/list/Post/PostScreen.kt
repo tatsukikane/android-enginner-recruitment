@@ -192,9 +192,7 @@ fun DropdownMenuButton(
             onDismissRequest = { expanded = false }
         ) {
             DropdownMenuItem(
-                onClick = {
-                    // Do something
-                }
+                onClick = { expanded = false }
             ) {
                 Text(
                     text = option1,
@@ -203,7 +201,7 @@ fun DropdownMenuButton(
                 )
             }
             DropdownMenuItem(
-                onClick = {}
+                onClick = { expanded = false }
             ) {
                 Text(
                     text = option2,
@@ -212,7 +210,7 @@ fun DropdownMenuButton(
                 )
             }
             DropdownMenuItem(
-                onClick = {}
+                onClick = { expanded = false }
             ) {
                 Text(
                     text = option3,
