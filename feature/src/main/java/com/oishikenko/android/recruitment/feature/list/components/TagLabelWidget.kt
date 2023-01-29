@@ -20,7 +20,7 @@ fun TagLabelWidget(
     Row(
         horizontalArrangement = Arrangement.Center,
         modifier = Modifier
-            .padding(top = 4.dp)
+            .padding(top = 8.dp)
             .background(
                 color = Color(0xFFffa500),
                 shape = RoundedCornerShape(20.dp)

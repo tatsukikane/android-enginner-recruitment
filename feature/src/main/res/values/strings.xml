@@ -5,6 +5,7 @@
     <string name="records_detail_title_recipe_name">レシピ名</string>
     <string name="records_detail_title_comment">コメント</string>
     <string name="records_detail_title_recipe">レシピ</string>
+    <string name="cooking_post_title">料理記録を登録</string>
     <string name="recipe_type">レシピタイプ</string>
     <string name="recipe_type_main">主菜/主食</string>
     <string name="recipe_type_side">副菜</string>

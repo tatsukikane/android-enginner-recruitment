@@ -34,7 +34,7 @@ fun PostRecipeScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = stringResource(id = R.string.cooking_records_title),
+                        text = stringResource(id = R.string.cooking_post_title),
                         fontWeight = FontWeight.Bold
                     )
                 },
@@ -73,7 +73,6 @@ fun PostRecipeScreen(
 
 @Composable
 fun TappableIconOnImageWidget(
-//    imageUrl: String
 ) {
     Box(modifier = Modifier.height(288.dp)) {
         AsyncImage(
@@ -125,7 +124,7 @@ fun RegisterButton(
     Row(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(top = 8.dp)
+        modifier = Modifier.padding(vertical = 8.dp)
     ) {
         Spacer(modifier = Modifier.weight(1.0f))
         Button(
