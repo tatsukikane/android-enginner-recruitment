@@ -1,4 +1,4 @@
-package com.oishikenko.android.recruitment.feature.list
+package com.oishikenko.android.recruitment.feature.list.RecipeList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,7 +15,7 @@ class RecipeListViewModel @Inject constructor(
 ) : ViewModel() {
     val cookingRecordsPager = Pager(
         PagingConfig(pageSize = 100)
-    ){
+    ) {
         RecipeListPagingSource(cookingRecordsRepository)
     }.flow.cachedIn(viewModelScope)
 }

@@ -24,14 +24,15 @@ fun RecipeListItem(
     cookingRecord: CookingRecord,
     navController: NavController
 ) {
-    var comment = cookingRecord.comment
-    var imageUrl = cookingRecord.imageUrl.split("/")[4]
-    var recipeType = cookingRecord.recipeType
-    var recordedAt = cookingRecord.recordedAt
+    val comment = cookingRecord.comment
+    val imageUrl = cookingRecord.imageUrl.split("/")[4]
+    val recipeType = cookingRecord.recipeType
+    val recordedAt = cookingRecord.recordedAt
+    val recipeNameNumber = (1..3).random()
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(96.dp)
+            .height(192.dp)
             .padding(
                 horizontal = 16.dp,
                 vertical = 8.dp,
@@ -42,8 +43,7 @@ fun RecipeListItem(
                 shape = RoundedCornerShape(8.dp)
             )
             .clickable {
-                navController.navigate("recipe_detail_screen/$comment/$imageUrl/$recipeType/$recordedAt")
-
+                navController.navigate("recipe_detail_screen/$comment/$imageUrl/$recipeType/$recordedAt/$recipeNameNumber")
             },
     ) {
         AsyncImage(
@@ -51,18 +51,20 @@ fun RecipeListItem(
             contentDescription = cookingRecord.comment,
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                //TODO: 高さ指定、定数を入れずにやるやり方がありそう
-                .size(96.dp)
+                .size(192.dp)
                 .clip(RoundedCornerShape(8.dp)),
         )
         Column(
             modifier = Modifier
                 .fillMaxHeight()
-                .padding(
-                    start = 8.dp,
-                ),
-            verticalArrangement = Arrangement.Center,
+                .padding(start = 8.dp),
         ) {
+            Text(
+                text = RecipeNameGenerator(recipeNameNumber),
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(vertical = 8.dp)
+            )
             Text(
                 text =
                 when (cookingRecord.recipeType) {
@@ -74,10 +76,17 @@ fun RecipeListItem(
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
             )
-            Text(
-                text = cookingRecord.recordedAt.replace("-", "/").dropLast(3),
-                fontSize = 14.sp,
-            )
+            TagLabelWidget(recipeNameNumber)
+            Spacer(modifier = Modifier.weight(1.0f))
+            Row(modifier = Modifier.fillMaxWidth()) {
+                Spacer(modifier = Modifier.weight(1.0f))
+                Text(
+                    text = "作成日：${cookingRecord.recordedAt.replace("-", "/").dropLast(9)}",
+                    fontSize = 14.sp,
+                    color = Color(0xFF676767),
+                    modifier = Modifier.padding(end = 16.dp)
+                )
+            }
         }
     }
 }

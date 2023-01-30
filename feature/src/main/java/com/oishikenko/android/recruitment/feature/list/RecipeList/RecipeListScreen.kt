@@ -4,10 +4,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,6 +23,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.oishikenko.android.recruitment.feature.R
+import com.oishikenko.android.recruitment.feature.list.RecipeList.RecipeListViewModel
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalLifecycleComposeApi::class)
 @Composable
@@ -31,7 +31,7 @@ fun RecipeListScreen(
     viewModel: RecipeListViewModel = hiltViewModel(),
     navController: NavController
 ) {
-    var cookingRecords = viewModel.cookingRecordsPager.collectAsLazyPagingItems()
+    val cookingRecords = viewModel.cookingRecordsPager.collectAsLazyPagingItems()
     Scaffold { innerPadding ->
         Column {
             Row(
@@ -54,53 +54,64 @@ fun RecipeListScreen(
                         .size(64.dp)
                 )
             }
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(innerPadding)
-                    .consumedWindowInsets(innerPadding)
-            ) {
-                items(cookingRecords) { item ->
-                    item?.let {
-                        RecipeListItem(
-                            cookingRecord = it,
-                            navController = navController
-                        )
-                    }
-                }
-                when (cookingRecords.loadState.append) {
-                    is LoadState.NotLoading -> Unit
-                    LoadState.Loading -> {
-                        item {
-                            LoadingItem()
+            Box {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(innerPadding)
+                        .consumedWindowInsets(innerPadding)
+                ) {
+                    items(cookingRecords) { item ->
+                        item?.let {
+                            RecipeListItem(
+                                cookingRecord = it,
+                                navController = navController
+                            )
                         }
                     }
-                    is LoadState.Error -> {
-                        item {
-                            ErrorItem(message = "エラーが発生しました")
+                    when (cookingRecords.loadState.append) {
+                        is LoadState.NotLoading -> Unit
+                        LoadState.Loading -> {
+                            item {
+                                LoadingItem()
+                            }
                         }
-                    }
-                }
-                //アプリ起動後の初回ローディング
-                when (cookingRecords.loadState.refresh) {
-                    is LoadState.NotLoading -> Unit
-                    LoadState.Loading -> {
-                        item {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .wrapContentHeight(),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                CircularProgressIndicator()
+                        is LoadState.Error -> {
+                            item {
+                                ErrorItem(message = stringResource(id = R.string.error))
                             }
                         }
                     }
-                    is LoadState.Error -> {
-                        item {
-                            ErrorItem(message = "エラーが発生しました")
+                    //アプリ起動後の初回ローディング
+                    when (cookingRecords.loadState.refresh) {
+                        is LoadState.NotLoading -> Unit
+                        LoadState.Loading -> {
+                            item {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .wrapContentHeight(),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    CircularProgressIndicator()
+                                }
+                            }
+                        }
+                        is LoadState.Error -> {
+                            item {
+                                ErrorItem(message = stringResource(id = R.string.error))
+                            }
                         }
                     }
+                }
+                FloatingActionButton(
+                    onClick = { navController.navigate("post_recipe_screen") },
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(12.dp),
+                    backgroundColor = Color(0xFF87cefa)
+                ) {
+                    Icon(Icons.Filled.Add, tint = Color.White, contentDescription = "追加")
                 }
             }
         }
